@@ -65,6 +65,8 @@ type options struct {
 	updateReq rls.UpdateReleaseRequest
 	// release uninstall options are applied directly to the uninstall release request
 	uninstallReq rls.UninstallReleaseRequest
+	// version options are applied directly to the version Request
+	versionReq rls.GetVersionRequest
 	// release get status options are applied directly to the get release status request
 	statusReq rls.GetReleaseStatusRequest
 	// release get content options are applied directly to the get release content request
@@ -210,6 +212,13 @@ func UpgradeTimeout(timeout int64) UpdateOption {
 func DeleteTimeout(timeout int64) DeleteOption {
 	return func(opts *options) {
 		opts.uninstallReq.Timeout = timeout
+	}
+}
+
+// VersionTimeout specifies the number of seconds before kubernetes calls timeout
+func VersionTimeout(timeout int64) VersionOption {
+	return func(opts *options) {
+		opts.versionReq.Timeout = timeout
 	}
 }
 

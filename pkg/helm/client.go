@@ -200,7 +200,9 @@ func (h *Client) GetVersion(opts ...VersionOption) (*rls.GetVersionResponse, err
 	for _, opt := range opts {
 		opt(&reqOpts)
 	}
-	req := &rls.GetVersionRequest{}
+	req := &reqOpts.versionReq
+	h.Option(ConnectTimeout(5))
+	fmt.Println(h)
 	ctx := NewContext()
 
 	if reqOpts.before != nil {

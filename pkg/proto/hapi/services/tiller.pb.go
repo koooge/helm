@@ -769,12 +769,21 @@ func (m *UninstallReleaseResponse) GetInfo() string {
 
 // GetVersionRequest requests for version information.
 type GetVersionRequest struct {
+	// timeout specifies the max amount of time any kubernetes client command can run.
+	Timeout int64 `protobuf:"varint,4,opt,name=timeout" json:"timeout,omitempty"`
 }
 
 func (m *GetVersionRequest) Reset()                    { *m = GetVersionRequest{} }
 func (m *GetVersionRequest) String() string            { return proto.CompactTextString(m) }
 func (*GetVersionRequest) ProtoMessage()               {}
 func (*GetVersionRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
+
+func (m *GetVersionRequest) GetTimeout() int64 {
+	if m != nil {
+		return m.Timeout
+	}
+	return 0
+}
 
 type GetVersionResponse struct {
 	Version *hapi_version.Version `protobuf:"bytes,1,opt,name=Version" json:"Version,omitempty"`

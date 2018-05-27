@@ -116,7 +116,8 @@ func (v *versionCmd) run() error {
 		fmt.Fprintf(v.out, "Kubernetes: %#v\n", k8sVersion)
 	}
 
-	resp, err := v.client.GetVersion()
+	options := []helm.VersionOption{helm.VersionTimeout(5)}
+	resp, err := v.client.GetVersion(options...)
 	if err != nil {
 		if grpc.Code(err) == codes.Unimplemented {
 			return errors.New("server is too old to know its version")
